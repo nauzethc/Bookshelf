@@ -1,0 +1,20 @@
+<div class="row-fluid" ng-init="getBooks()">
+    <div class="span12">
+        <table class="table table-striped">
+            <thead>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Read</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="book in books.objects | orderBy: 'title'">
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author_full_name }}</td>
+                    <td><input type="checkbox" ng-model="book.read" /></td>
+                    <td><a href="#" class="btn"><i class="icon-minus-sign"></i></a>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
