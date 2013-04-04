@@ -2,6 +2,9 @@
 
 Bookshelf.controller('BooksCtrl', function ($scope, $rootScope, Book, BookUser) {
 
+    $scope.books = Book.query();
+
+    /*
     $scope.getBooks = function() {
         if (!angular.isDefined($rootScope.selectedUser)){
             console.log($rootScope.selectedUser);
@@ -10,5 +13,6 @@ Bookshelf.controller('BooksCtrl', function ($scope, $rootScope, Book, BookUser) 
             $scope.books = BookUser.query({}, $rootScope.selectedUser);
         }
     };
+    */
 
 });
