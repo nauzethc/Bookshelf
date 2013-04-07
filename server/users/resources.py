@@ -7,6 +7,7 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         authorization = Authorization()
+        always_return_data = True
         fields = ['id', 'username', 'first_name', 'last_name', 'full_name']
         filtering = {
             'username': ALL,
