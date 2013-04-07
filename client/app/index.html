@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="components/bootstrap.css/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="components/bootstrap.css/css/bootstrap-responsive.css"> -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="Bookshelf">
@@ -42,6 +44,48 @@
           </form>
         </div>
       </div>
+
+      <!-- Add User modal -->
+      <div id="addUserModal" class="modal hide fade">
+          <div class="modal-header">
+              <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-hidden="true">&times;
+              </button>
+              <h3>New User</h3>
+          </div>
+          <div class="modal-body">
+              <form class="form-horizontal">
+                  <div class="control-group">
+                      <label for="inputFirstName" class="control-label">First Name</label>
+                      <div class="controls">
+                          <input type="text" id="inputFirstName"
+                              ng-model="newUser.first_name" ng-change="refreshUsername(newUser.first_name)" ng-required />
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label for="inputLastName" class="control-label">Last Name</label>
+                      <div class="controls">
+                          <input type="text" id="inputLastName"
+                              ng-model="newUser.last_name" ng-required />
+                      </div>
+                  </div>
+                  <div class="control-group">
+                      <label for="inputUsername" class="control-label">Username</label>
+                      <div class="controls">
+                          <input type="text" id="inputUsername"
+                              ng-model="newUser.username" ng-required />
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+              <a href="#" ng-click="save(newUser)" class="btn btn-primary">Add</a>
+          </div>
+      </div>
     </div>
 
     <div class="container-fluid" ng-controller="AlertCtrl">
@@ -51,8 +95,12 @@
       </div>
     </div>
 
+
+
     <div class="container-fluid" ng-view></div>
 
+    <script src="components/jquery/jquery.js"></script>
+    <script src="components/bootstrap.css/js/bootstrap.js"></script>
     <script src="components/angular/angular-unstable.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
 
@@ -65,15 +113,19 @@
     <script src="scripts/controllers/alerts.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/books.js"></script>
+    <script src="scripts/controllers/authors.js"></script>
     <script src="scripts/controllers/users.js"></script>
     <!-- endbuild -->
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!--
+    Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
+    -->
+
   </body>
 </html>

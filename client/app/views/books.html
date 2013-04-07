@@ -1,5 +1,17 @@
-<div class="row-fluid">
-    <div class="span12">
+<div class="row-fluid" ng-show="showBooks">
+<div class="span6">
+        <form ng-controller="AuthorsCtrl" class="span12">
+            <fieldset>
+                <legend>New Author</legend>
+                <input type="text" class="span6" ng-model="newAuthor.first_name" ng-required placeholder="First Name" />
+                <input type="text" class="span6" ng-model="newAuthor.last_name"  ng-required placeholder="Last Name" />
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-click="create(newAuthor)">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="span6">
         <form ng-model="newBook" class="span12">
             <fieldset>
                 <legend>New book</legend>
@@ -17,7 +29,7 @@
     </div>
 </div>
 
-<div class="row-fluid" ng-init="getBooks()">
+<div class="row-fluid" ng-show="showBooks" ng-init="getBooks()">
     <div class="span12">
         <table class="table table-striped">
             <thead>
@@ -27,13 +39,34 @@
                 <th>Delete</th>
             </thead>
             <tbody>
-                <tr ng-repeat="book in books.objects | orderBy: 'title'" ng-animate="'enter'">
+                <tr ng-repeat="book in books.objects | orderBy: 'title'">
                     <td>{{ book.title }}</td>
                     <td>{{ book.author_full_name }}</td>
                     <td><input type="checkbox" ng-model="book.read" ng-change="update(book)" /></td>
-                    <td><a class="btn" ng-click="remove(book)"><i class="icon-minus-sign"></i></a>
+                    <td><a class="btn" role="button" href="#deleteModal" data-toggle="modal" ng-click="select(book)"><i class="icon-minus-sign"></i></a>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Delete Book modal -->
+<div id="deleteModal" class="modal hide fade">
+    <div class="modal-header">
+        <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-hidden="true">&times;
+        </button>
+        <h3>Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure to delete this book?</p>
+        <p><strong>{{ selectedBook.author_full_name }} - {{ selectedBook.title }}</strong></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+        <a href="#" ng-click="remove(selectedBook)" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Delete</a>
     </div>
 </div>

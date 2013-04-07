@@ -10,10 +10,14 @@ Bookshelf.factory('Shared', function($rootScope){
         this.broadcastUser(user);
     }
     sharedService.broadcastUser = function(user) {
-        console.log("User changed to " + user.username + '!');
         $rootScope.$broadcast('userChanged');
     }
 
+    // Authors
+    sharedService.authorCreated = null;
+    sharedService.broadcastAuthor = function(author) {
+        $rootScope.$broadcast('authorCreated');
+    }
 
     // Alerts
     sharedService.alerts = [];

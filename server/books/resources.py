@@ -9,6 +9,7 @@ class AuthorResource(ModelResource):
     class Meta:
         queryset = Author.objects.all()
         authorization = Authorization()
+        always_return_data = True
         fields = ['id', 'first_name', 'last_name', 'full_name']
 
     def dehydrate(self, bundle):
@@ -23,6 +24,7 @@ class BookResource(ModelResource):
     class Meta:
         queryset = Book.objects.all()
         authorization = Authorization()
+        always_return_data = True
         filtering = {
             'slug': ALL,
             'author': ALL_WITH_RELATIONS,

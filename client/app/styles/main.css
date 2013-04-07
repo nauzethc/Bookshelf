@@ -1,7 +1,5 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
-@import url("bootstrap.css");
-
 .custom-enter-setup,
 .custom-leave-setup,
 .custom-move-setup {

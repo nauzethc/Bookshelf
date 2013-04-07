@@ -16,7 +16,3 @@ Bookshelf.factory('BookByUser', ['$resource', function($resource){
         query:   { method:'GET', isArray: false },
     })
 }]);
-
-Bookshelf.factory('BookByUri', ['$resource', function($resource){
-    return $resource('http://localhost\\:8000:uri', {}, {})
-}]);
