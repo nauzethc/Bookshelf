@@ -1,3 +1,22 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form ng-model="newBook" class="span12">
+            <fieldset>
+                <legend>New book</legend>
+                <select class="span6"
+                    ng-model="newBook.author"
+                    ng-options="author.resource_uri as author.full_name for author in authors.objects | orderBy: 'last_name'"
+                    ng-required>
+                </select>
+                <input type="text" class="span6" ng-model="newBook.title" ng-required placeholder="Title" />
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-click="create(newBook)">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
 <div class="row-fluid" ng-init="getBooks()">
     <div class="span12">
         <table class="table table-striped">
@@ -8,11 +27,11 @@
                 <th>Delete</th>
             </thead>
             <tbody>
-                <tr ng-repeat="book in books.objects | orderBy: 'title'">
+                <tr ng-repeat="book in books.objects | orderBy: 'title'" ng-animate="'enter'">
                     <td>{{ book.title }}</td>
                     <td>{{ book.author_full_name }}</td>
-                    <td><input type="checkbox" ng-model="book.read" /></td>
-                    <td><a href="#" class="btn"><i class="icon-minus-sign"></i></a>
+                    <td><input type="checkbox" ng-model="book.read" ng-change="update(book)" /></td>
+                    <td><a class="btn" ng-click="remove(book)"><i class="icon-minus-sign"></i></a>
                 </tr>
             </tbody>
         </table>

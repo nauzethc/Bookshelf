@@ -1,12 +1,11 @@
 'use strict';
 
-Bookshelf.controller('UsersCtrl', function ($scope, $rootScope, User) {
+Bookshelf.controller('UsersCtrl', function ($scope, Shared, User) {
 
     $scope.users = User.query();
 
     $scope.selectUser = function(user) {
-        $rootScope.selectedUser = user;
-        $rootScope.$apply();
+        Shared.selectUser(user);
     }
 
 });

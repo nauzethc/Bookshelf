@@ -9,10 +9,14 @@ Bookshelf.factory('Book', ['$resource', function($resource){
     })
 }]);
 
-Bookshelf.factory('BookUser', ['$resource', function($resource){
-    return $resource('/api/v1/book/?user__username=:username', {
+Bookshelf.factory('BookByUser', ['$resource', function($resource){
+    return $resource('http://localhost\\:8000/api/v1/book/?user__username=:username', {
         "username": "@username"
     }, {
         query:   { method:'GET', isArray: false },
     })
+}]);
+
+Bookshelf.factory('BookByUri', ['$resource', function($resource){
+    return $resource('http://localhost\\:8000:uri', {}, {})
 }]);

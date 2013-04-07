@@ -1,3 +1,38 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
 @import url("bootstrap.css");
+
+.custom-enter-setup,
+.custom-leave-setup,
+.custom-move-setup {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  position:relative;
+}
+
+.custom-enter-setup {
+  left:-10px;
+  opacity:0;
+}
+.custom-enter-setup.custom-enter-start {
+  left:0;
+  opacity:1;
+}
+
+.custom-leave-setup {
+  left:0;
+  opacity:1;
+}
+.custom-leave-setup.custom-leave-start {
+  left:-10px;
+  opacity:0;
+}
+
+.custom-move-setup {
+  opacity:0.5;
+}
+.custom-move-setup.custom-move-start {
+  opacity:1;
+}
