@@ -57,7 +57,15 @@
             </thead>
             <tbody>
                 <tr ng-repeat="book in books.objects | filter: bookFilter | orderBy: 'title'">
-                    <td>{{ book.title }}</td>
+                    <td>
+                        <div ng-show="showEditor">
+                            <form class="form-inline">
+                                <input type="text" class="input-small" ng-model="newTitle" ng-required />
+                                <button class="btn btn-small" ng-click="setTitle(book)">Save</button>
+                                <button class="btn btn-small" ng-click="disableEditor()">Cancel</button>
+                            </form>
+                        </div>
+                        <span ng-hide="showEditor" ng-click="enableEditor(book)">{{ book.title }}</span></td>
                     <td>{{ book.author_full_name }}</td>
                     <td><input type="checkbox" ng-model="book.read" ng-change="update(book)" /></td>
                     <td><a class="btn" role="button" href="#deleteModal" data-toggle="modal" ng-click="select(book)"><i class="icon-minus-sign"></i></a>

@@ -3,6 +3,7 @@
 Bookshelf.controller('BooksCtrl', function ($scope, Shared, Author, Book, BookByUser) {
 
     $scope.showBooks = false;
+    $scope.showEditor = false;
     $scope.selectedBook = null;
     $scope.authors = Author.query();
     $scope.response = null;
@@ -64,5 +65,21 @@ Bookshelf.controller('BooksCtrl', function ($scope, Shared, Author, Book, BookBy
             );
         }
     };
+
+    $scope.enableEditor = function(book) {
+        this.newTitle = book.title;
+        this.showEditor = true;
+    }
+
+    $scope.disableEditor = function() {
+        this.newTitle = '';
+        this.showEditor = false;
+    }
+
+    $scope.setTitle = function(book) {
+        book.title = this.newTitle;
+        $scope.update(book);
+        this.disableEditor();
+    }
 
 });

@@ -27,7 +27,7 @@
     <!-- Add your site or application content here -->
 
     <!-- Navbar -->
-    <div class="container-fluid" ng-controller="UsersCtrl">
+    <div class="container-fluid">
       <div class="navbar" style="margin-top: 20px;">
         <div class="navbar-inner">
           <a href="#" class="brand">Bookshelf</a>
@@ -35,7 +35,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#/books/">Books</a></li>
           </ul>
-          <form class="navbar-form pull-right">
+          <form class="navbar-form pull-right" ng-controller="UsersCtrl">
             <select class="span3"
               ng-model="selectedUser"
               ng-change="selectUser(selectedUser)"
