@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="components/bootstrap.css/css/bootstrap.css">
+    <link rel="stylesheet" href="components/bootstrap/docs/assets/css/bootstrap.css">
     <!-- <link rel="stylesheet" href="components/bootstrap.css/css/bootstrap-responsive.css"> -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
@@ -34,6 +34,7 @@
           <ul class="nav">
             <li><a href="#">Home</a></li>
             <li><a href="#/books/">Books</a></li>
+            <li><a href="#/covers/">Covers</a></li>
           </ul>
           <form class="navbar-form pull-right" ng-controller="UsersCtrl">
             <select class="span3"
@@ -41,24 +42,17 @@
               ng-change="selectUser(selectedUser)"
               ng-options="user as user.full_name for user in users.objects">
             </select>
-            <a class="btn" role="button" href="#addUserModal" data-toggle="modal">Add</a>
-          </form>
-        </div>
-      </div>
 
-      <!-- Add User modal -->
-      <div id="addUserModal" class="modal hide fade">
-          <div class="modal-header">
-              <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-hidden="true">&times;
-              </button>
-              <h3>New User</h3>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal">
+            <!-- Adduser modal -->
+            <a class="btn" ng-click="showModal()">Add</a>
+
+            <div modal="addUserModal" close="closeModal()" options="opts">
+              <div class="modal-header">
+                <h4>Add user</h4>
+              </div>
+
+              <div class="modal-body">
+                <form class="form-horizontal">
                   <div class="control-group">
                       <label for="inputFirstName" class="control-label">First Name</label>
                       <div class="controls">
@@ -80,15 +74,20 @@
                               ng-model="newUser.username" ng-required />
                       </div>
                   </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-              <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
-              <a href="#" ng-click="create(newUser)" data-dismiss="modal" aria-hidden="true" class="btn btn-primary">Add</a>
-          </div>
+                </form>
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn cancel" ng-click="closeModal()">Cancel</button>
+                <button class="btn btn-primary" ng-click="create(newUser)">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
+    <!-- Alerts -->
     <div class="container-fluid" ng-controller="AlertCtrl">
       <div class="alert" ng-class="alert.level" ng-repeat="alert in alerts">
         <button type="button" class="close" ng-click="close($index)">&times;</button>
@@ -96,13 +95,11 @@
       </div>
     </div>
 
-
-
+    <!-- Main content -->
     <div class="container-fluid" ng-view></div>
 
-    <script src="components/jquery/jquery.js"></script>
-    <script src="components/bootstrap.css/js/bootstrap.js"></script>
     <script src="components/angular/angular.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
 
     <!-- build:js scripts/scripts.js -->
@@ -110,10 +107,12 @@
     <script src="scripts/services/shared.js"></script>
     <script src="scripts/services/authors.js"></script>
     <script src="scripts/services/books.js"></script>
+    <script src="scripts/services/covers.js"></script>
     <script src="scripts/services/users.js"></script>
     <script src="scripts/controllers/alerts.js"></script>
     <script src="scripts/controllers/home.js"></script>
     <script src="scripts/controllers/books.js"></script>
+    <script src="scripts/controllers/covers.js"></script>
     <script src="scripts/controllers/authors.js"></script>
     <script src="scripts/controllers/users.js"></script>
     <!-- endbuild -->

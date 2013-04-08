@@ -68,30 +68,24 @@
                         <span ng-hide="showEditor" ng-click="enableEditor(book)">{{ book.title }}</span></td>
                     <td>{{ book.author_full_name }}</td>
                     <td><input type="checkbox" ng-model="book.read" ng-change="update(book)" /></td>
-                    <td><a class="btn" role="button" href="#deleteModal" data-toggle="modal" ng-click="select(book)"><i class="icon-minus-sign"></i></a>
+                    <td>
+                        <div modal="deleteBookModal" close="closeModal()" options="opts">
+                            <div class="modal-header">
+                                <h4>Confirmation</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure to delete this book?</p>
+                                <p><strong>{{ selectedBook.author_full_name }} - {{ selectedBook.title }}</strong></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" ng-click="closeModal()">Cancel</button>
+                                <button class="btn btn-primary" ng-click="remove(selectedBook)">Delete</button>
+                            </div>
+                        </div>
+                        <a class="btn" ng-click="showModal(book)"><i class="icon-minus-sign"></i></a>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-</div>
-
-<!-- Delete Book modal -->
-<div id="deleteModal" class="modal hide fade">
-    <div class="modal-header">
-        <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-hidden="true">&times;
-        </button>
-        <h3>Confirmation</h3>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure to delete this book?</p>
-        <p><strong>{{ selectedBook.author_full_name }} - {{ selectedBook.title }}</strong></p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
-        <a href="#" ng-click="remove(selectedBook)" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Delete</a>
     </div>
 </div>

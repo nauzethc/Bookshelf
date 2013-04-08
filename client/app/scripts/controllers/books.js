@@ -57,6 +57,7 @@ Bookshelf.controller('BooksCtrl', function ($scope, Shared, Author, Book, BookBy
                 function() {
                     $scope.books.objects.splice(index, 1);
                     Shared.addAlert('success', 'The book was removed successfuly!');
+                    $scope.deleteBookModal = false;
                 },
                 // Error
                 function() {
@@ -81,5 +82,17 @@ Bookshelf.controller('BooksCtrl', function ($scope, Shared, Author, Book, BookBy
         $scope.update(book);
         this.disableEditor();
     }
+
+    $scope.showModal = function(book) {
+        this.deleteBookModal = true;
+        $scope.select(book);
+    }
+    $scope.closeModal = function() {
+        this.deleteBookModal = false;
+    }
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade: true,
+    };
 
 });

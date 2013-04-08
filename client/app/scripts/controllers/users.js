@@ -28,12 +28,24 @@ Bookshelf.controller('UsersCtrl', function ($scope, Shared, User) {
                 }
                 $scope.users.objects.push(resource);
                 Shared.addAlert('success', 'The user ' + resource.full_name + ' was added!');
+                $scope.closeModal();
             },
             // Error
             function() {
                 Shared.addAlert('error', 'The user could not be added!');
             }
         );
+    };
+
+    $scope.showModal = function() {
+        this.addUserModal = true;
+    }
+    $scope.closeModal = function() {
+        this.addUserModal = false;
+    }
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade: true,
     };
 
 });

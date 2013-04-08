@@ -1,0 +1,30 @@
+<div class="row-fluid">
+    <div class="span12">
+        <form class="form-search">
+            <fieldset>
+                <legend>Search Cover</legend>
+                <input type="text" ng-model="toSearch" ng-required placeholder="Search..." />
+                <div class="form-actions">
+                    <button class="btn btn-primary pull-right" ng-click="search(toSearch)">Search</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<div ng-show="searchOnProcess" class="row-fluid">
+    <div class="span4 offset4">
+        <div class="progress progress-striped active">
+            <div class="bar" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="searchCompleted" class="row-fluid">
+    <div class="span12">
+        <h3 class="span12">Covers</h3>
+        <div class="span3" ng-repeat="image in images">
+            <img src="{{ image.tbUrl }}" class="img-rounded" />
+        </div>
+    </div>
+</div>
