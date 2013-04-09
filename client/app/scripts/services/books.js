@@ -10,8 +10,9 @@ Bookshelf.factory('Book', ['$resource', function($resource){
 }]);
 
 Bookshelf.factory('BookByUser', ['$resource', function($resource){
-    return $resource('http://localhost\\:8000/api/v1/book/?user__username=:username', {
-        "username": "@username"
+    return $resource('http://localhost\\:8000/api/v1/book/?user__username=:username&limit=10&offset=:pageNumber', {
+        "username": "@username",
+        "pageNumber": 0
     }, {
         query:   { method:'GET', isArray: false },
     })

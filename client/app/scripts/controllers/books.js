@@ -4,26 +4,69 @@ Bookshelf.controller('BooksCtrl', function ($scope, Shared, Author, Book, BookBy
 
     $scope.showBooks = false;
     $scope.showEditor = false;
+    $scope.showPaginator = false;
     $scope.selectedBook = null;
     $scope.authors = Author.query();
     $scope.response = null;
 
     if (Shared.selectedUser != null) {
-        $scope.books = BookByUser.query({}, Shared.selectedUser);
-        $scope.showBooks = true;
+        $scope.get();
     } else {
         $scope.books = { 'objects': [] };
         $scope.showBooks = false;
     }
 
     $scope.$on('userChanged', function() {
-        $scope.books = BookByUser.query({}, Shared.selectedUser);
-        $scope.showBooks = true;
+        $scope.get();
     });
 
     $scope.$on('authorCreated', function() {
         $scope.authors.objects.push(Shared.authorCreated);
     });
+
+    $scope.loadPaginator = function() {
+        if ($scope.books.meta.previous != null) {
+            $scope.showPaginator = true;
+            $scope.paginatorPrev = '';
+        } else {
+            $scope.paginatorPrev = 'disabled';
+        }
+        if ($scope.books.meta.next != null) {
+            $scope.showPaginator = true;
+            $scope.paginatorNext = '';
+        } else {
+            $scope.paginatorNext = 'disabled';
+        }
+    }
+
+    $scope.get = function(offset_uri) {
+        var offset = 0;
+        var re = /(?:offset=)(\d+)/;
+        // Parse uri if is defined
+        if (angular.isDefined(offset_uri)) {
+            var match = re.exec(offset_uri);
+            if (match.length > 1) {
+                offset = match[1];
+            }
+        }
+        // Load books
+        $scope.books = BookByUser.query({ 'pageNumber': offset }, Shared.selectedUser,
+            function(){
+                $scope.loadPaginator();
+                $scope.showBooks = true;
+            }
+        );
+    }
+    $scope.getPrev = function() {
+        if ($scope.books.meta.previous) {
+            $scope.get($scope.books.meta.previous);
+        }
+    }
+    $scope.getNext = function() {
+        if ($scope.books.meta.next) {
+            $scope.get($scope.books.meta.next);
+        }
+    }
 
     $scope.select = function(book) {
         $scope.selectedBook = book;

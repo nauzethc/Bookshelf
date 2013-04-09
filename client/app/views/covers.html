@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row">
     <div class="span12">
         <form class="form-search">
             <fieldset>
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div ng-show="searchOnProcess" class="row-fluid">
+<div class="row" ng-show="searchOnProcess">
     <div class="span4 offset4">
         <div class="progress progress-striped active">
             <div class="bar" style="width: 100%;"></div>
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div ng-show="searchCompleted" class="row-fluid">
+<div class="row" ng-show="searchCompleted">
     <div class="span12">
         <h3 class="span12">Covers</h3>
         <div class="span3" ng-repeat="image in images">

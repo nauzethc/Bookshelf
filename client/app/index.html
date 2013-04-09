@@ -3,18 +3,18 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
+<head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="components/bootstrap/docs/assets/css/bootstrap.css">
-    <!-- <link rel="stylesheet" href="components/bootstrap.css/css/bootstrap-responsive.css"> -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
-  </head>
-  <body ng-app="Bookshelf">
+</head>
+
+<body ng-app="Bookshelf">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -27,76 +27,81 @@
     <!-- Add your site or application content here -->
 
     <!-- Navbar -->
-    <div class="container-fluid">
-      <div class="navbar" style="margin-top: 20px;">
-        <div class="navbar-inner">
-          <a href="#" class="brand">Bookshelf</a>
-          <ul class="nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#/books/">Books</a></li>
-            <li><a href="#/covers/">Covers</a></li>
-          </ul>
-          <form class="navbar-form pull-right" ng-controller="UsersCtrl">
-            <select class="span3"
-              ng-model="selectedUser"
-              ng-change="selectUser(selectedUser)"
-              ng-options="user as user.full_name for user in users.objects">
-            </select>
+    <div class="container">
 
-            <!-- Adduser modal -->
-            <a class="btn" ng-click="showModal()">Add</a>
+        <div class="navbar" style="margin-top: 20px;">
+            <div class="navbar-inner">
 
-            <div modal="addUserModal" close="closeModal()" options="opts">
-              <div class="modal-header">
-                <h4>Add user</h4>
-              </div>
+                <!-- Menu -->
+                <a href="#" class="brand">Bookshelf</a>
+                <ul class="nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#/books/">Books</a></li>
+                    <li><a href="#/covers/">Covers</a></li>
+                </ul>
 
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <div class="control-group">
-                      <label for="inputFirstName" class="control-label">First Name</label>
-                      <div class="controls">
-                          <input type="text" id="inputFirstName"
-                              ng-model="newUser.first_name" ng-change="refreshUsername(newUser.first_name)" ng-required />
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label for="inputLastName" class="control-label">Last Name</label>
-                      <div class="controls">
-                          <input type="text" id="inputLastName"
-                              ng-model="newUser.last_name" ng-required />
-                      </div>
-                  </div>
-                  <div class="control-group">
-                      <label for="inputUsername" class="control-label">Username</label>
-                      <div class="controls">
-                          <input type="text" id="inputUsername"
-                              ng-model="newUser.username" ng-required />
-                      </div>
-                  </div>
-                </form>
-              </div>
+                <div ng-controller="UsersCtrl">
+                    <!-- User selector -->
+                    <form class="navbar-form pull-right">
+                        <select class="span3"
+                            ng-model="selectedUser"
+                            ng-change="selectUser(selectedUser)"
+                            ng-options="user as user.full_name for user in users.objects">
+                        </select>
+                        <a class="btn navbar-form" ng-click="showModal()">Add</a>
+                    </form>
 
-              <div class="modal-footer">
-                <button class="btn cancel" ng-click="closeModal()">Cancel</button>
-                <button class="btn btn-primary" ng-click="create(newUser)">Add</button>
-              </div>
+                    <!-- Adduser modal -->
+                    <div modal="addUserModal" close="closeModal()" options="opts">
+                        <div class="modal-header">
+                            <h4>Add user</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="control-group">
+                                    <label for="inputFirstName" class="control-label">First Name</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputFirstName" ng-model="newUser.first_name" ng-change="refreshUsername(newUser.first_name)" ng-required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="inputLastName" class="control-label">Last Name</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputLastName" ng-model="newUser.last_name" ng-required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="inputUsername" class="control-label">Username</label>
+                                    <div class="controls">
+                                        <input type="text" id="inputUsername" ng-model="newUser.username" ng-required />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn cancel" ng-click="closeModal()">Cancel</button>
+                            <button class="btn btn-primary" ng-click="create(newUser)">Add</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-          </form>
         </div>
-      </div>
+
     </div>
 
     <!-- Alerts -->
-    <div class="container-fluid" ng-controller="AlertCtrl">
-      <div class="alert" ng-class="alert.level" ng-repeat="alert in alerts">
-        <button type="button" class="close" ng-click="close($index)">&times;</button>
-        {{ alert.message }}
-      </div>
+    <div class="container" ng-controller="AlertCtrl">
+        <div class="alert" ng-class="alert.level" ng-repeat="alert in alerts">
+            <button type="button" class="close" ng-click="close($index)">&times;</button>
+            {{ alert.message }}
+        </div>
     </div>
 
     <!-- Main content -->
-    <div class="container-fluid" ng-view></div>
+    <div class="container" ng-view></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -127,5 +132,5 @@
     </script>
     -->
 
-  </body>
+</body>
 </html>

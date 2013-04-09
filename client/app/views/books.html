@@ -1,52 +1,49 @@
-<div class="row-fluid" ng-show="showBooks">
-<div class="span6">
-        <form ng-controller="AuthorsCtrl" class="span12">
-            <fieldset>
-                <legend>New Author</legend>
-                <input type="text" class="span6" ng-model="newAuthor.first_name" ng-required placeholder="First Name" />
-                <input type="text" class="span6" ng-model="newAuthor.last_name"  ng-required placeholder="Last Name" />
-                <div class="form-actions">
-                    <button class="btn btn-primary pull-right" ng-click="create(newAuthor)">Save</button>
-                </div>
-            </fieldset>
+<div class="row" ng-show="showBooks">
+
+    <!-- New author form -->
+    <div class="span6">
+        <h4>New Author</h4>
+        <form class="form-inline input-prepend input-append" ng-controller="AuthorsCtrl">
+            <input class="span2" type="text" ng-model="newAuthor.first_name" ng-required placeholder="First Name" />
+            <input class="span2" type="text" ng-model="newAuthor.last_name"  ng-required placeholder="Last Name" />
+            <button class="btn btn-primary" ng-click="create(newAuthor)">Save</button>
         </form>
     </div>
+
+    <!-- New book form -->
     <div class="span6">
-        <form ng-model="newBook" class="span12">
-            <fieldset>
-                <legend>New book</legend>
-                <select class="span6"
-                    ng-model="newBook.author"
-                    ng-options="author.resource_uri as author.full_name for author in authors.objects | orderBy: 'last_name'"
-                    ng-required>
-                </select>
-                <input type="text" class="span6" ng-model="newBook.title" ng-required placeholder="Title" />
-                <div class="form-actions">
-                    <button class="btn btn-primary pull-right" ng-click="create(newBook)">Save</button>
-                </div>
-            </fieldset>
+        <h4>New Book</h4>
+        <form class="form-inline" ng-model="newBook">
+            <select class="span2"
+                ng-model="newBook.author"
+                ng-options="author.resource_uri as author.full_name for author in authors.objects | orderBy: 'last_name'"
+                ng-required>
+            </select>
+            <div class="input-append">
+                <input type="text" ng-model="newBook.title" ng-required placeholder="Title" />
+                <button class="btn btn-primary" ng-click="create(newBook)">Save</button>
+            </div>
         </form>
     </div>
 </div>
 
-<div class="row-fluid" ng-show="books.objects.length">
+
+<div class="row" ng-show="books.objects.length">
     <!-- Search filter form -->
-    <form class="span12 form-search">
-        <fieldset>
-            <legend>Filter</legend>
-            <input type="text"
-                placeholder="Title..."
-                class="input-medium search-query"
-                ng-model="bookFilter.title" />
-            <input type="text"
-                placeholder="Author..."
-                class="input-medium search-query"
-                ng-model="bookFilter.author_full_name" />
-        </fieldset>
+    <form class="span6 form-search">
+        <input type="text"
+            placeholder="Title..."
+            class="input-medium search-query"
+            ng-model="bookFilter.title" />
+        <input type="text"
+            placeholder="Author..."
+            class="input-medium search-query"
+            ng-model="bookFilter.author_full_name" />
     </form>
 </div>
 
-<div class="row-fluid" ng-show="showBooks" ng-init="getBooks()">
+
+<div class="row" ng-show="showBooks" ng-init="getBooks()">
     <div class="span12">
         <table ng-show="books.objects.length" class="table table-striped">
             <thead>
@@ -87,5 +84,14 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="row" ng-show="showPaginator">
+    <div class="pagination text-center">
+        <ul>
+            <li ng-class="paginatorPrev"><a ng-click="getPrev()">Prev</a></li>
+            <li ng-class="paginatorNext"><a ng-click="getNext()">Next</a></li>
+        </ul>
     </div>
 </div>
